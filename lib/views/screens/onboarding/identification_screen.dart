@@ -1,5 +1,9 @@
 import 'package:davr_mobile/controllers/users_controller.dart';
+import 'package:davr_mobile/generated/assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
+// import 'package:lottie/lottie.dart';
 
 class IdentificationScreen extends StatefulWidget {
   const IdentificationScreen({super.key});
@@ -20,7 +24,7 @@ class _IdentificationScreenState extends State<IdentificationScreen> {
 
       try {
         await usersController.addUser(fullName!, passportId!);
-        Navigator.pushReplacementNamed(context, '/main');
+        Navigator.pushReplacementNamed(context, '/success');
       } catch (e) {
         String message = e.toString();
 
@@ -43,66 +47,80 @@ class _IdentificationScreenState extends State<IdentificationScreen> {
       appBar: AppBar(
         title: const Text("Identifikatsiya"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Ism-familiya",
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(
+                  width: 200.w,
+                  height: 200.h,
+                  child: Lottie.asset(Assets.lottiesIdentification),
                 ),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return "Ism-Familiyangizni kiriting";
-                  }
-
-                  return null;
-                },
-                onSaved: (newValue) {
-                  // save fullName
-                  fullName = newValue;
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Pasport seriyasi va raqami",
-                ),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return "Passport seriyasi va raqamni kiriting";
-                  }
-
-                  return null;
-                },
-                onSaved: (newValue) {
-                  // save email
-                  passportId = newValue;
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Ism-familiya",
+                    prefixIcon: Icon(Icons.account_box),
                   ),
-                  onPressed: saveData,
-                  child: const Text("Saqlash"),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return "Ism-Familiyangizni kiriting";
+                    }
+
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    // save fullName
+                    fullName = newValue;
+                  },
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 20.h,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Pasport seriyasi va raqami",
+                    prefixIcon: Icon(Icons.badge),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return "Passport seriyasi va raqamni kiriting";
+                    } else {
+                      final emailRegex = RegExp(r'^[A-Z]{2}\d{7}$');
+                      if (!emailRegex.hasMatch(value)) {
+                        return "Ma'lumot xato. Format(AB1234567)";
+                      }
+                    }
+
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    // save email
+                    passportId = newValue;
+                  },
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 45.h,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                    ),
+                    onPressed: saveData,
+                    child: const Text("Saqlash"),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

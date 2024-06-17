@@ -1,8 +1,10 @@
 import 'package:davr_mobile/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditUserDialog extends StatefulWidget {
   final User? user;
+
   const EditUserDialog({super.key, required this.user});
 
   @override
@@ -12,12 +14,12 @@ class EditUserDialog extends StatefulWidget {
 class _EditUserDialogState extends State<EditUserDialog> {
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController emailController = TextEditingController();
+  // TextEditingController emailController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
   TextEditingController passportIdController = TextEditingController();
 
   String? fullName;
-  String? email;
+  // String? email;
   String? passportId;
 
   @override
@@ -25,10 +27,10 @@ class _EditUserDialogState extends State<EditUserDialog> {
     super.initState();
     if (widget.user != null) {
       fullName = widget.user!.fullName;
-      email = widget.user!.email;
+      // email = widget.user!.email;
       passportId = widget.user!.passportId;
 
-      emailController.text = email!;
+      // emailController.text = email!;
       fullNameController.text = fullName!;
       passportIdController.text = passportId!;
     }
@@ -40,7 +42,7 @@ class _EditUserDialogState extends State<EditUserDialog> {
 
       Navigator.pop(context, {
         "fullName": fullName,
-        "email": email,
+        // "email": email,
         "passportId": passportId,
       });
       setState(() {});
@@ -51,39 +53,39 @@ class _EditUserDialogState extends State<EditUserDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       scrollable: true,
-      title: const Text("Profil ma'lumotlarini yangilash"),
+      title: const Text("Ma'lumotlarini yangilash"),
       content: Form(
         key: _formKey,
         child: Column(
           children: [
-            TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              controller: emailController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Elektron pochta",
-              ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return "Elektron pochtangizni kiriting";
-                } else {
-                  final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-                  if (!emailRegex.hasMatch(value)) {
-                    return "Elektron pochta xato";
-                  }
-                }
-
-                return null;
-              },
-              onSaved: (newValue) {
-                // save email
-                email = newValue;
-              },
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+            // TextFormField(
+            //   keyboardType: TextInputType.emailAddress,
+            //   textInputAction: TextInputAction.next,
+            //   controller: emailController,
+            //   decoration: const InputDecoration(
+            //     border: OutlineInputBorder(),
+            //     labelText: "Elektron pochta",
+            //   ),
+            //   validator: (value) {
+            //     if (value == null || value.trim().isEmpty) {
+            //       return "Elektron pochtangizni kiriting";
+            //     } else {
+            //       final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+            //       if (!emailRegex.hasMatch(value)) {
+            //         return "Elektron pochta xato";
+            //       }
+            //     }
+            //
+            //     return null;
+            //   },
+            //   onSaved: (newValue) {
+            //     // save email
+            //     email = newValue;
+            //   },
+            // ),
+            // SizedBox(
+            //   height: 10.h,
+            // ),
             TextFormField(
               controller: fullNameController,
               decoration: const InputDecoration(
@@ -102,8 +104,8 @@ class _EditUserDialogState extends State<EditUserDialog> {
                 fullName = newValue;
               },
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             TextFormField(
               controller: passportIdController,
@@ -114,6 +116,11 @@ class _EditUserDialogState extends State<EditUserDialog> {
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
                   return "Passport seriyasi va raqamni kiriting";
+                } else {
+                  final emailRegex = RegExp(r'^[A-Z]{2}\d{7}$');
+                  if (!emailRegex.hasMatch(value)) {
+                    return "Ma'lumot xato. Format(AB1234567)";
+                  }
                 }
 
                 return null;

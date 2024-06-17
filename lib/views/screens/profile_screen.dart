@@ -1,9 +1,12 @@
 import 'package:davr_mobile/controllers/users_controller.dart';
+import 'package:davr_mobile/generated/assets.dart';
 import 'package:davr_mobile/main.dart';
 import 'package:davr_mobile/models/user.dart';
 import 'package:davr_mobile/services/auth_http_services.dart';
 import 'package:davr_mobile/views/widgets/edit_user_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -26,8 +29,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  Future<void> _fetchUser() async {
+    final fetchedUser = await usersController.getUser();
+    setState(() {
+      user = fetchedUser;
+    });
+  }
+
   void editUser(User user) async {
-    final data = await showDialog(
+    final data = await showDialog<Map<String, dynamic>>(
       context: context,
       builder: (ctx) {
         return EditUserDialog(user: user);
@@ -38,12 +48,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       await usersController.editUser(
         user.id,
         data['fullName'],
-        data['email'],
+        // data['email'],
         data['passportId'],
       );
-      setState(() {
-        usersController.getUser();
-      });
+      await _fetchUser();
     }
   }
 
@@ -74,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
     if (response != null) {
       if (response) {
-        await usersController.deleteUser(user!.id);
+        await usersController.deleteUser(user!.id, user!.userId);
         purgeRemove();
       }
     }
@@ -84,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Navigator.pushNamedAndRemoveUntil(
       context,
       '/register',
-      (Route<dynamic> route) => false,
+          (Route<dynamic> route) => false,
     );
     AuthHttpServices.logout();
   }
@@ -108,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return const MyApp();
                   },
                 ),
-                (Route<dynamic> route) => false,
+                    (Route<dynamic> route) => false,
               );
               return AuthHttpServices.logout();
             },
@@ -118,87 +126,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: user == null
           ? const Center(
-              child: Text("Ma'lumotlar yuklanmadi"),
-            )
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const CircleAvatar(
-                        child: Icon(Icons.person),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        user!.fullName,
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text("Elektron pochta"),
-                        Text(user!.email),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text("Pasport seriyasi va raqami"),
-                        Text(user!.passportId)
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 40,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: deleteUser,
-                      child: const Text(
-                        "Hisobni o'chirish",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
+        child: Text("Ma'lumotlar yuklanmadi"),
+      )
+          : SingleChildScrollView(
+        child: Padding(
+          padding:
+          const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            children: [
+              SizedBox(
+                width: 200.w,
+                height: 200.h,
+                child: Lottie.asset(Assets.lottiesHello),
               ),
-            ),
+              Text(
+                user!.fullName,
+                style: TextStyle(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(
+                height: 25.h,
+              ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Elektron pochta"),
+                    Text(user!.email),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15.h,
+              ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Pasport seriyasi va raqami"),
+                    Text(user!.passportId)
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 45.h,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                  ),
+                  onPressed: deleteUser,
+                  child: const Text(
+                    "Hisobni o'chirish",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,8 +1,11 @@
 import 'package:davr_mobile/controllers/users_controller.dart';
+import 'package:davr_mobile/generated/assets.dart';
 import 'package:davr_mobile/services/auth_http_services.dart';
 import 'package:davr_mobile/views/screens/auth/login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -73,11 +76,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                const FlutterLogo(
-                  size: 100,
+                SizedBox(
+                  width: 200.w,
+                  height: 200.h,
+                  child: Lottie.asset(Assets.lottiesWriteBlank),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 TextFormField(
                   keyboardType: TextInputType.emailAddress,
@@ -104,8 +109,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     email = newValue;
                   },
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 TextFormField(
                   obscureText: hidePasswordFiled,
@@ -141,8 +146,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     password = newValue;
                   },
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 TextFormField(
                   obscureText: hideConfirmPasswordField,
@@ -179,8 +184,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     passwordConfirm = newValue;
                   },
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 isLoading
                     ? const Center(
@@ -188,32 +193,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       )
                     : SizedBox(
                         width: double.infinity,
-                        height: 50,
+                        height: 45.h,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                             ),
                           ),
                           onPressed: submit,
                           child: const Text("Ro'yhatdan o'tish"),
                         ),
                       ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 RichText(
                   text: TextSpan(
                     children: [
                       const TextSpan(
                         text: "Ro'yhatdan o'tganmisiz? ",
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                        style: TextStyle(color: Colors.black),
                       ),
                       TextSpan(
                         text: "Kirish",
                         style: const TextStyle(
                           color: Colors.blue,
-                          fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
                         recognizer: TapGestureRecognizer()

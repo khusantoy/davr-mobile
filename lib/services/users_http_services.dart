@@ -1,10 +1,13 @@
 import 'dart:convert';
 
 import 'package:davr_mobile/models/user.dart';
+import 'package:davr_mobile/services/auth_http_services.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UsersHttpServices {
+  final AuthHttpServices authHttpServices = AuthHttpServices();
+
   Future<void> addUser(String fullName, String passportId) async {
     Uri url =
         Uri.parse("https://exam-team-5-default-rtdb.firebaseio.com/users.json");
@@ -57,7 +60,7 @@ class UsersHttpServices {
   Future<void> editUser(
     String id,
     String fullName,
-    String email,
+    // String email,
     String passportId,
   ) async {
     Uri url = Uri.parse(
@@ -65,7 +68,7 @@ class UsersHttpServices {
 
     Map<String, dynamic> userData = {
       "fullName": fullName,
-      "email": email,
+      // "email": email,
       "passportId": passportId,
     };
 
@@ -75,7 +78,7 @@ class UsersHttpServices {
     );
   }
 
-  Future<void> deleteUser(String id) async {
+  Future<void> deleteUser(String id, String userId) async {
     print(id);
     try {
       Uri url = Uri.parse(

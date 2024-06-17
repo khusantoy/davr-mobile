@@ -1,12 +1,14 @@
 import 'dart:async';
-
+import 'package:davr_mobile/generated/assets.dart';
 import 'package:davr_mobile/services/auth_http_services.dart';
 import 'package:davr_mobile/views/screens/auth/forgot_password_screen.dart';
 import 'package:davr_mobile/views/screens/auth/register_screen.dart';
 import 'package:davr_mobile/views/screens/main/main_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,7 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _authHttpServices = AuthHttpServices();
 
   bool isLoading = false;
-
   bool hidePasswordField = true;
 
   String? email;
@@ -33,10 +34,11 @@ class _LoginScreenState extends State<LoginScreen> {
   void handleTimeout() {
     AuthHttpServices.logout();
     Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (ctx) => const LoginScreen(),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (ctx) => const LoginScreen(),
+      ),
+    );
   }
 
   void submit() async {
@@ -53,7 +55,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (ctx) => const MainScreen()),
+          MaterialPageRoute(
+            builder: (ctx) => const MainScreen(),
+          ),
         );
       } on ClientException {
         showDialog(
@@ -102,11 +106,13 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                const FlutterLogo(
-                  size: 100,
+                SizedBox(
+                  width: 200.w,
+                  height: 200.h,
+                  child: Lottie.asset(Assets.lottiesLogin),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 TextFormField(
                   keyboardType: TextInputType.emailAddress,
@@ -133,8 +139,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     email = newValue;
                   },
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 TextFormField(
                   obscureText: hidePasswordField,
@@ -180,7 +186,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: const Text(
                         "Parolni unutdingizmi?",
                         style: TextStyle(
-                          fontSize: 16,
                           color: Colors.blue,
                           fontWeight: FontWeight.w500,
                         ),
@@ -195,32 +200,31 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     : SizedBox(
                         width: double.infinity,
-                        height: 50,
+                        height: 45.h,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                             ),
                           ),
                           onPressed: submit,
                           child: const Text("Kirish"),
                         ),
                       ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 RichText(
                   text: TextSpan(
                     children: [
                       const TextSpan(
                         text: "Sizda hisob mavjud emasmi? ",
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                        style: TextStyle(color: Colors.black),
                       ),
                       TextSpan(
                         text: "Ro'yhatdan o'tish",
                         style: const TextStyle(
                           color: Colors.blue,
-                          fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
                         recognizer: TapGestureRecognizer()
