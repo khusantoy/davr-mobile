@@ -1,3 +1,4 @@
+import 'package:davr_mobile/views/screens/history/history.dart';
 import 'package:flutter/material.dart';
 
 import '../home/home.dart';
@@ -17,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const Center(child: Text('Payment')),
     const TransactionScreen(),
-    const Center(child: Text('History')),
+    const HistoryScreen(),
   ];
 
   @override
