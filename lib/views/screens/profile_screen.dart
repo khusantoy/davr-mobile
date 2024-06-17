@@ -81,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
     if (response != null) {
       if (response) {
-        await usersController.deleteUser(user!.id);
+        await usersController.deleteUser(user!.id, user!.userId);
         purgeRemove();
       }
     }
