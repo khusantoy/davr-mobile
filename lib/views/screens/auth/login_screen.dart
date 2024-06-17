@@ -60,23 +60,23 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context,
           builder: (ctx) {
             return const AlertDialog(
-              title: Text("Error"),
-              content: Text("Connect to the internet"),
+              title: Text("Tarmoq xatosi"),
+              content: Text("Internetga ulanishni tekshiring"),
             );
           },
         );
       } catch (e) {
         String message = e.toString();
 
-        if (e.toString().contains("EMAIL_EXISTS")) {
-          message = "Email is exists";
+        if (e.toString().contains("INVALID_LOGIN_CREDENTIALS")) {
+          message = "Kiritilgan ma'lumotlarni qaytadan tekshirib ko'ring";
         }
 
         showDialog(
           context: context,
           builder: (ctx) {
             return AlertDialog(
-              title: const Text("Error"),
+              title: const Text("Nimadir xato"),
               content: Text(message),
             );
           },
@@ -93,146 +93,151 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("Tizimga kirish"),
       ),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              const FlutterLogo(
-                size: 100,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Email",
-                  prefixIcon: Icon(Icons.email),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                const FlutterLogo(
+                  size: 100,
                 ),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return "Enter your email";
-                  } else if (!value.contains('@') || !value.contains('.')) {
-                    return "Email is not correct";
-                  }
-
-                  return null;
-                },
-                onSaved: (newValue) {
-                  // save email
-                  email = newValue;
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                obscureText: hidePasswordField,
-                keyboardType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: "Password",
-                  prefixIcon: const Icon(Icons.password),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        hidePasswordField = !hidePasswordField;
-                      });
-                    },
-                    icon: Icon(hidePasswordField
-                        ? Icons.visibility_off
-                        : Icons.visibility),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Elektron pochta",
+                    prefixIcon: Icon(Icons.email),
                   ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return "Elektron pochtangizni kiriting";
+                    } else {
+                      final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                      if (!emailRegex.hasMatch(value)) {
+                        return "Elektron pochta xato";
+                      }
+                    }
+
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    // save email
+                    email = newValue;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return "Please, enter your password";
-                  }
-                  return null;
-                },
-                onSaved: (newValue) {
-                  // save password
-                  password = newValue;
-                },
-              ),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (ctx) => const ForgotPasswordScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      "Forgot password?",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.blue,
-                        fontWeight: FontWeight.w500,
-                      ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  obscureText: hidePasswordField,
+                  keyboardType: TextInputType.visiblePassword,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: "Parol",
+                    prefixIcon: const Icon(Icons.password),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          hidePasswordField = !hidePasswordField;
+                        });
+                      },
+                      icon: Icon(hidePasswordField
+                          ? Icons.visibility_off
+                          : Icons.visibility),
                     ),
-                  )),
-              const SizedBox(
-                height: 20,
-              ),
-              isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return "Parolingizni kiriting";
+                    }
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    // save password
+                    password = newValue;
+                  },
+                ),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (ctx) => const ForgotPasswordScreen(),
                           ),
+                        );
+                      },
+                      child: const Text(
+                        "Parolni unutdingizmi?",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
                         ),
-                        onPressed: submit,
-                        child: const Text("Login"),
                       ),
-                    ),
-              const SizedBox(
-                height: 20,
-              ),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    const TextSpan(
-                      text: "Don't have an account yet? ",
-                      style: TextStyle(color: Colors.black, fontSize: 16),
-                    ),
-                    TextSpan(
-                      text: "Register",
-                      style: const TextStyle(
-                        color: Colors.blue,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (ctx) => const RegisterScreen(),
-                            ),
-                          );
-                        },
-                    )
-                  ],
+                    )),
+                const SizedBox(
+                  height: 20,
                 ),
-              )
-            ],
+                isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: submit,
+                          child: const Text("Kirish"),
+                        ),
+                      ),
+                const SizedBox(
+                  height: 20,
+                ),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      const TextSpan(
+                        text: "Sizda hisob mavjud emasmi? ",
+                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      ),
+                      TextSpan(
+                        text: "Ro'yhatdan o'tish",
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (ctx) => const RegisterScreen(),
+                              ),
+                            );
+                          },
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -1,6 +1,6 @@
-import 'package:davr_mobile/services/auth_http_services.dart';
 import 'package:davr_mobile/views/screens/auth/login_screen.dart';
 import 'package:davr_mobile/views/screens/home_screen.dart';
+import 'package:davr_mobile/views/screens/identification_screen.dart';
 import 'package:davr_mobile/views/screens/profile_screen.dart';
 import 'package:davr_mobile/views/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
         "/login": (context) => const LoginScreen(),
         "/home": (context) => const HomeScreen(),
         "/profile": (context) => const ProfileScreen(),
+        "/identification": (context) => const IdentificationScreen(),
       },
     );
   }

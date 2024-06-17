@@ -36,6 +36,7 @@ class AuthHttpServices {
 
       await sharedPreferences.setString("token", data['idToken']);
       await sharedPreferences.setString("userId", data['localId']);
+      await sharedPreferences.setString("email", email);
       DateTime expiryDate = DateTime.now().add(
         Duration(
           seconds: int.parse(

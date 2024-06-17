@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:davr_mobile/controllers/users_controller.dart';
 import 'package:davr_mobile/services/auth_http_services.dart';
 import 'package:davr_mobile/views/screens/auth/login_screen.dart';
-import 'package:davr_mobile/views/screens/home_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -27,23 +24,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool hidePasswordFiled = true;
   bool hideConfirmPasswordField = true;
 
-  void checkExpire() {
-    Timer(const Duration(seconds: 3600), handleTimeout);
-  }
-
-  void handleTimeout() {
-    AuthHttpServices.logout();
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (ctx) => const LoginScreen(),
-        ));
-  }
-
-  void saveUser() {
-    usersController.addUser();
-  }
-
   void submit() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -55,24 +35,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       try {
         await _authHttpServices.register(email!, password!);
-        checkExpire();
-        saveUser();
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (ctx) => const HomeScreen()),
-        );
+        Navigator.pushReplacementNamed(context, '/identification');
       } catch (e) {
         String message = e.toString();
 
         if (e.toString().contains("EMAIL_EXISTS")) {
-          message = "Email is exists";
+          message = "Siz ro'yhatdan o'tgansiz";
         }
 
         showDialog(
           context: context,
           builder: (ctx) {
             return AlertDialog(
-              title: const Text("Error"),
+              title: const Text("Diqqat"),
               content: Text(message),
             );
           },
@@ -89,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Register"),
+        title: const Text("Ro'yhatdan o'tish"),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -109,14 +84,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: "Email",
+                    hintText: "Elektron pochta",
                     prefixIcon: Icon(Icons.email),
                   ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Enter your email";
-                    } else if (!value.contains('@') || !value.contains('.')) {
-                      return "Email is not correct";
+                      return "Elektron pochtangizni kiriting";
+                    } else {
+                      final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                      if (!emailRegex.hasMatch(value)) {
+                        return "Elektron pochta xato";
+                      }
                     }
 
                     return null;
@@ -136,7 +114,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: _passwordController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    labelText: "Password",
+                    labelText: "Parol",
                     prefixIcon: const Icon(Icons.password),
                     suffixIcon: IconButton(
                       onPressed: () {
@@ -151,7 +129,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Please, enter your password";
+                      return "Parolni kiriting";
+                    } else if (value.trim().length < 6) {
+                      return "Parol uzunligi 6 dan kam bo'lmasligi kerak";
                     }
 
                     return null;
@@ -171,7 +151,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: _passwordConfirmController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    labelText: "Confirm Password",
+                    labelText: "Parolni tasdiqlash",
                     prefixIcon: const Icon(Icons.password),
                     suffixIcon: IconButton(
                       onPressed: () {
@@ -186,10 +166,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Please, enter your password";
+                      return "Parolni kiriting";
                     } else if (_passwordConfirmController.text !=
                         _passwordController.text) {
-                      return "Password doesn't match";
+                      return "Parol mos emas";
                     }
 
                     return null;
@@ -216,7 +196,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                           onPressed: submit,
-                          child: const Text("Register"),
+                          child: const Text("Ro'yhatdan o'tish"),
                         ),
                       ),
                 const SizedBox(
@@ -226,11 +206,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   text: TextSpan(
                     children: [
                       const TextSpan(
-                        text: "Already have an account? ",
+                        text: "Ro'yhatdan o'tganmisiz? ",
                         style: TextStyle(color: Colors.black, fontSize: 16),
                       ),
                       TextSpan(
-                        text: "Login",
+                        text: "Kirish",
                         style: const TextStyle(
                           color: Colors.blue,
                           fontSize: 16,
