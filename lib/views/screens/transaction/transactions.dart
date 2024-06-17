@@ -23,6 +23,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
   final formKey = GlobalKey<FormState>();
   int fromCard = 0;
   bool isCardChosen = false;
+  double cardBalance = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -30,30 +31,6 @@ class _TransactionScreenState extends State<TransactionScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text("Transaction"),
-        /* actions: [
-          IconButton(
-            onPressed: () {
-              AuthHttpService.logout();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (ctx) {
-                    return const SignInScreen();
-                  },
-                ),
-              );
-            },
-            icon: const Icon(Icons.logout),
-          ),
-          IconButton(
-              onPressed: () {
-                //trx.sendMoneyToCard(100, 9860, DateTime.now().toString());
-                trx.sendMoney(1500, 1400, 1000);
-                trx.getJonatmalar();
-                trx.getTushumlar();
-              },
-              icon: Icon(Icons.add))
-        ],*/
       ),
       body: Form(
         key: formKey,
@@ -122,16 +99,25 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 child: FilledButton(
                     onPressed: () async {
                       if (formKey.currentState!.validate() && isCardChosen) {
-                        await trsController
-                            .sendMoney(
-                                fromCard,
-                                int.parse(cardTextController.text),
-                                double.parse(amountTextController.text))
-                            .then(
-                          (value) {
-                            setState(() {});
-                          },
-                        );
+                        if (double.parse(amountTextController.text) >
+                            cardBalance) {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text("Not enough money in card"),
+                              );
+                            },
+                          );
+                          return;
+                        }
+                        await trsController.sendMoney(
+                            fromCard,
+                            int.parse(cardTextController.text),
+                            double.parse(amountTextController.text));
+                        await cardsController
+                            .getCards()
+                            .then((value) => setState(() {}));
                       }
                     },
                     child: const Text('Send')),
@@ -165,6 +151,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                         child: GestureDetector(
                           onTap: () {
                             fromCard = card.cardNumber.toInt();
+                            cardBalance = card.balance.toDouble();
                             isCardChosen = true;
                             setState(() {});
                           },

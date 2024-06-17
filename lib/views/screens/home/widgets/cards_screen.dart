@@ -24,15 +24,24 @@ class _CardsScreenState extends State<CardsScreen> {
     );
     if (data != null) {
       try {
-        cardsController.addCard(
+        cardsController
+            .addCard(
           balance: data['balance'],
           bankName: data['bankName'],
           cardName: data['cardName'],
           cardNumber: data['cardNumber'],
           expiryDate: data['expiryDate'],
           type: data['type'],
+        )
+            .then(
+          (value) {
+            cardsController.getCards().then(
+              (value) {
+                setState(() {});
+              },
+            );
+          },
         );
-        setState(() {});
       } catch (e) {
         if (kDebugMode) {
           print(e);
