@@ -11,4 +11,13 @@ class UsersController {
   Future<User?> getUser() async {
     return await userHttpServices.getUser();
   }
+
+  Future<void> editUser(
+    String id,
+    String fullName,
+    String email,
+    String passportId,
+  ) async {
+    await userHttpServices.editUser(id, fullName, email, passportId);
+  }
 }

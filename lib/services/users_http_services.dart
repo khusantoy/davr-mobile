@@ -40,6 +40,8 @@ class UsersHttpServices {
       if (data.isNotEmpty) {
         String userKey = data.keys.first;
         Map<String, dynamic> userData = data[userKey];
+        userData['id'] = userKey;
+        print(userData['id']);
         User user = User.fromJson(userData);
         return user;
       } else {
@@ -50,5 +52,26 @@ class UsersHttpServices {
       print("Error fetching user data: ${response.statusCode}");
       return null;
     }
+  }
+
+  Future<void> editUser(
+    String id,
+    String fullName,
+    String email,
+    String passportId,
+  ) async {
+    Uri url = Uri.parse(
+        "https://exam-team-5-default-rtdb.firebaseio.com/users/$id.json");
+
+    Map<String, dynamic> userData = {
+      "fullName": fullName,
+      "email": email,
+      "passportId": passportId,
+    };
+
+    await http.patch(
+      url,
+      body: jsonEncode(userData),
+    );
   }
 }

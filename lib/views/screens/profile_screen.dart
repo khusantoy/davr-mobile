@@ -2,6 +2,7 @@ import 'package:davr_mobile/controllers/users_controller.dart';
 import 'package:davr_mobile/main.dart';
 import 'package:davr_mobile/models/user.dart';
 import 'package:davr_mobile/services/auth_http_services.dart';
+import 'package:davr_mobile/views/widgets/edit_user_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -25,6 +26,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  void editUser(User user) async {
+    final data = await showDialog(
+      context: context,
+      builder: (ctx) {
+        return EditUserDialog(user: user);
+      },
+    );
+
+    if (data != null) {
+      await usersController.editUser(
+        user.id,
+        data['fullName'],
+        data['email'],
+        data['passportId'],
+      );
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: const Text("Profil"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: user != null ? () => editUser(user!) : null,
             icon: const Icon(Icons.edit),
           ),
           IconButton(
@@ -53,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: user == null
           ? const Center(
-              child: Text("Ma'lumotlar yuknalmadi"),
+              child: Text("Ma'lumotlar yuklanmadi"),
             )
           : Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
