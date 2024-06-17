@@ -1,6 +1,8 @@
 import 'package:davr_mobile/services/auth_http_services.dart';
 import 'package:davr_mobile/views/screens/auth/login_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -34,14 +36,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         Future.delayed(
           const Duration(seconds: 2),
           () {
-            Navigator.push(
+            Navigator.pushNamedAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (ctx) => const LoginScreen()),
+              '/login',
+              (Route<dynamic> route) => false,
             );
           },
         );
       } catch (e) {
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
       } finally {
         setState(() {
           isLoading = false;
@@ -54,7 +59,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Reset Password"),
+        title: const Text("Parolni tiklash"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -67,7 +72,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    labelText: "Email",
+                    hintText: "Elektron pochta",
                     prefixIcon: const Icon(Icons.email),
                     suffixIcon: isSuccess
                         ? const Icon(
@@ -78,9 +83,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Enter your email";
-                    } else if (!value.contains('@') || !value.contains('.')) {
-                      return "Email is not correct";
+                      return "Elektron pochtangizni kiriting";
+                    } else {
+                      final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                      if (!emailRegex.hasMatch(value)) {
+                        return "Elektron pochta xato";
+                      }
                     }
                     return null;
                   },
@@ -91,23 +99,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Row(
-                  children: [
-                    Icon(
-                      Icons.info,
-                      size: 16,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      "We send reset password link to your email",
-                      style: TextStyle(fontSize: 14),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
+                const Text(
+                    "Biz elektron pochtangizga parolni tiklash uchun havola yuboramiz"),
+                SizedBox(
+                  height: 20.h,
                 ),
                 isLoading
                     ? const Center(
@@ -115,15 +110,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       )
                     : SizedBox(
                         width: double.infinity,
-                        height: 50,
+                        height: 45.h,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                             ),
                           ),
                           onPressed: reset,
-                          child: const Text("Send"),
+                          child: const Text("Yuborish"),
                         ),
                       ),
               ],

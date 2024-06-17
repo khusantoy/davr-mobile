@@ -1,6 +1,8 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:davr_mobile/controllers/users_controller.dart';
 import 'package:davr_mobile/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -29,7 +31,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
       child: Column(
         children: [
           SizedBox(
-            height: 120,
+            height: 100.h,
             child: DrawerHeader(
               child: ListTile(
                 onTap: () {
@@ -49,16 +51,19 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Column(
               children: [
                 ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/settings');
+                  },
                   leading: const Icon(Icons.settings),
                   title: const Text("Sozlamalar"),
                   trailing: const Icon(Icons.arrow_forward_ios),
                   tileColor: Colors.grey.shade300,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.r),
                   ),
                 ),
               ],

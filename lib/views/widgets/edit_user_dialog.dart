@@ -1,5 +1,6 @@
 import 'package:davr_mobile/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditUserDialog extends StatefulWidget {
   final User? user;
@@ -51,7 +52,7 @@ class _EditUserDialogState extends State<EditUserDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       scrollable: true,
-      title: const Text("Profil ma'lumotlarini yangilash"),
+      title: const Text("Ma'lumotlarini yangilash"),
       content: Form(
         key: _formKey,
         child: Column(
@@ -81,8 +82,8 @@ class _EditUserDialogState extends State<EditUserDialog> {
                 email = newValue;
               },
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             TextFormField(
               controller: fullNameController,
@@ -102,8 +103,8 @@ class _EditUserDialogState extends State<EditUserDialog> {
                 fullName = newValue;
               },
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             TextFormField(
               controller: passportIdController,
@@ -114,6 +115,11 @@ class _EditUserDialogState extends State<EditUserDialog> {
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
                   return "Passport seriyasi va raqamni kiriting";
+                } else {
+                  final emailRegex = RegExp(r'^[A-Z]{2}\d{7}$');
+                  if (!emailRegex.hasMatch(value)) {
+                    return "Ma'lumot xato. Format(AB1234567)";
+                  }
                 }
 
                 return null;
