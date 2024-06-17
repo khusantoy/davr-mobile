@@ -20,4 +20,8 @@ class UsersController {
   ) async {
     await userHttpServices.editUser(id, fullName, email, passportId);
   }
+
+  Future<void> deleteUser(String id) async {
+    await userHttpServices.deleteUser(id);
+  }
 }

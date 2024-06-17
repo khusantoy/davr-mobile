@@ -41,8 +41,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
         data['email'],
         data['passportId'],
       );
-      setState(() {});
+      setState(() {
+        usersController.getUser();
+      });
     }
+  }
+
+  void deleteUser() async {
+    final response = await showDialog(
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          title: const Text("Ishonchingiz komilmi?"),
+          content: const Text(
+              "Agar siz rozilik bildirsangiz, tizimdan barcha ma'lumotlaringiz o'chiriladi."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: const Text("Bekor qilish"),
+            ),
+            FilledButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              child: const Text("Ha, ishonchim komil"),
+            ),
+          ],
+        );
+      },
+    );
+    if (response != null) {
+      if (response) {
+        await usersController.deleteUser(user!.id);
+        purgeRemove();
+      }
+    }
+  }
+
+  void purgeRemove() {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/register',
+      (Route<dynamic> route) => false,
+    );
+    AuthHttpServices.logout();
   }
 
   @override
@@ -57,13 +101,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushReplacement(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                   builder: (ctx) {
                     return const MyApp();
                   },
                 ),
+                (Route<dynamic> route) => false,
               );
               return AuthHttpServices.logout();
             },
@@ -130,7 +175,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Text(user!.passportId)
                       ],
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 40,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: deleteUser,
+                      child: const Text(
+                        "Hisobni o'chirish",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

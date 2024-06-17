@@ -74,4 +74,15 @@ class UsersHttpServices {
       body: jsonEncode(userData),
     );
   }
+
+  Future<void> deleteUser(String id) async {
+    print(id);
+    try {
+      Uri url = Uri.parse(
+          "https://exam-team-5-default-rtdb.firebaseio.com/users/$id.json");
+      await http.delete(url);
+    } catch (e) {
+      print(e);
+    }
+  }
 }
