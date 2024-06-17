@@ -1,4 +1,3 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:davr_mobile/controllers/users_controller.dart';
 import 'package:davr_mobile/models/user.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +17,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
   @override
   void initState() {
     super.initState();
-    usersController.getUser().then((value) {
-      setState(() {
-        user = value;
-      });
+    _fetchUser();
+  }
+
+  Future<void> _fetchUser() async {
+    final fetchedUser = await usersController.getUser();
+    setState(() {
+      user = fetchedUser;
     });
   }
 

@@ -28,8 +28,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  Future<void> _fetchUser() async {
+    final fetchedUser = await usersController.getUser();
+    setState(() {
+      user = fetchedUser;
+    });
+  }
+
   void editUser(User user) async {
-    final data = await showDialog(
+    final data = await showDialog<Map<String, dynamic>>(
       context: context,
       builder: (ctx) {
         return EditUserDialog(user: user);
@@ -43,9 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         data['email'],
         data['passportId'],
       );
-      setState(() {
-        usersController.getUser();
-      });
+      await _fetchUser();
     }
   }
 
