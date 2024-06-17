@@ -1,3 +1,4 @@
+import 'package:davr_mobile/generated/assets.dart';
 import 'package:davr_mobile/services/auth_http_services.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     });
     Future.delayed(const Duration(seconds: 4), () {
-      Navigator.pushReplacementNamed(context, isLoggedIn ? '/home' : '/login');
+      Navigator.pushReplacementNamed(context, isLoggedIn ? '/main' : '/login');
     });
   }
 
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Lottie.asset("assets/lottie_animation.json"),
+        child: Lottie.asset(Assets.lottiesLottieAnimation),
       ),
     );
   }

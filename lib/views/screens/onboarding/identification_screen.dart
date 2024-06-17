@@ -20,7 +20,7 @@ class _IdentificationScreenState extends State<IdentificationScreen> {
 
       try {
         await usersController.addUser(fullName!, passportId!);
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, '/main');
       } catch (e) {
         String message = e.toString();
 

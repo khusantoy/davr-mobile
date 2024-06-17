@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:davr_mobile/services/auth_http_services.dart';
 import 'package:davr_mobile/views/screens/auth/forgot_password_screen.dart';
 import 'package:davr_mobile/views/screens/auth/register_screen.dart';
-import 'package:davr_mobile/views/screens/home_screen.dart';
+import 'package:davr_mobile/views/screens/main/main_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (ctx) => const HomeScreen()),
+          MaterialPageRoute(builder: (ctx) => const MainScreen()),
         );
       } on ClientException {
         showDialog(
