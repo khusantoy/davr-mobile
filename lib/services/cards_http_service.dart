@@ -19,7 +19,7 @@ class CardsHttpService {
     List<Karta> cards = [];
 
     if (data != null) {
-      try{
+      try {
         data.forEach((key, value) {
           cards.add(Karta(
             id: key,
@@ -32,7 +32,7 @@ class CardsHttpService {
             type: value['type'],
           ));
         });
-      }catch(e){
+      } catch (e) {
         print(e);
       }
     }
@@ -40,7 +40,6 @@ class CardsHttpService {
   }
 
   Future<void> addCard({
-    required String id,
     required double balance,
     required String bankName,
     required String cardName,
@@ -52,20 +51,20 @@ class CardsHttpService {
     String? userId = sharedPreferences.getString("userId");
 
     Uri url = Uri.parse(
-        'https://exam-team-5-default-rtdb.firebaseio.com/cards2.json?orderBy="customerId"&equalTo="$userId"');
+        'https://exam-team-5-default-rtdb.firebaseio.com/cards2.json');
+
+    Map<String, dynamic> cardData = {
+      'balance': balance,
+      'bankName': bankName,
+      'cardName': cardName,
+      'cardNumber': cardNumber,
+      'customerId': userId,
+      'expiryDate': expiryDate,
+      'type': type,
+    };
 
     try {
-      final response = await http.post(url, body: {
-        jsonEncode({
-          'balance': balance,
-          'bankName': bankName,
-          'cardName': cardName,
-          'cardNumber': cardNumber,
-          'customerId': userId,
-          'expiryDate': expiryDate,
-          'type': type,
-        })
-      });
+      final response = await http.post(url, body: jsonEncode(cardData));
     } catch (e) {
       print(e);
     }

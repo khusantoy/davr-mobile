@@ -1,3 +1,5 @@
+import 'package:davr_mobile/views/screens/home/widgets/add_card_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../controllers/cards_controller.dart';
@@ -12,6 +14,32 @@ class CardsScreen extends StatefulWidget {
 
 class _CardsScreenState extends State<CardsScreen> {
   final cardsController = CardsController();
+
+  void addCard() async {
+    final data = await showDialog(
+      context: context,
+      builder: (ctx) {
+        return const AddCardDialog();
+      },
+    );
+    if (data != null) {
+      try {
+        cardsController.addCard(
+          balance: data['balance'],
+          bankName: data['bankName'],
+          cardName: data['cardName'],
+          cardNumber: data['cardNumber'],
+          expiryDate: data['expiryDate'],
+          type: data['type'],
+        );
+        setState(() {});
+      } catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +66,9 @@ class _CardsScreenState extends State<CardsScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          addCard();
+        },
         child: const Icon(Icons.add),
       ),
     );
