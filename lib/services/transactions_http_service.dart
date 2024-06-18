@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +19,9 @@ class TransactionsHttpService {
     // Fetch the current card data
     final cardsResponse = await http.get(Uri.parse(cardsUrl));
     if (cardsResponse.statusCode != 200) {
-      print('Failed to load cards data');
+      if (kDebugMode) {
+        print('Failed to load cards data');
+      }
       return;
     }
     final Map<String, dynamic> cards = json.decode(cardsResponse.body);
@@ -38,13 +41,17 @@ class TransactionsHttpService {
 
     // Check if cards were found
     if (fromCard == null || toCard == null) {
-      print('One or both cards not found');
+      if (kDebugMode) {
+        print('One or both cards not found');
+      }
       return;
     }
 
     // Check if fromCard has enough balance
     if (fromCard!['balance'] < amount) {
-      print('Insufficient balance on the sender\'s card');
+      if (kDebugMode) {
+        print('Insufficient balance on the sender\'s card');
+      }
       return;
     }
 
@@ -79,13 +86,15 @@ class TransactionsHttpService {
       body: json.encode(transaction),
     );
     if (transactionsResponse.statusCode != 200) {
-      print('Failed to log the transaction');
+      // print('Failed to log the transaction');
       return;
     }
 
-    print('Transaction successful!');
-    print('Updated ${fromCard!['cardName']} balance: ${fromCard!['balance']}');
-    print('Updated ${toCard!['cardName']} balance: ${toCard!['balance']}');
+    if (kDebugMode) {
+      print('Transaction successful!');
+    }
+    // print('Updated ${fromCard!['cardName']} balance: ${fromCard!['balance']}');
+    // print('Updated ${toCard!['cardName']} balance: ${toCard!['balance']}');
   }
 
   Future<List<Transaction>> getReceives() async {
@@ -111,7 +120,7 @@ class TransactionsHttpService {
         ));
       });
     }
-    print("Tushumlar: $tushumlar");
+    // print("Tushumlar: $tushumlar");
     return tushumlar;
   }
 
@@ -138,7 +147,7 @@ class TransactionsHttpService {
         ));
       });
     }
-    print("Jonatmalar: $jonatmalar");
+    // print("Jonatmalar: $jonatmalar");
     return jonatmalar;
   }
 

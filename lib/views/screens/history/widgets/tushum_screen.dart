@@ -1,5 +1,5 @@
-// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
-
+import 'package:davr_mobile/generated/assets.dart';
+import 'package:davr_mobile/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -7,8 +7,10 @@ import '../../../../controllers/transactions_controllers.dart';
 import '../../../../models/transaction.dart';
 
 class TushumScreens extends StatefulWidget {
+  const TushumScreens({super.key});
+
   @override
-  _TushumScreensState createState() => _TushumScreensState();
+  State<TushumScreens> createState() => _TushumScreensState();
 }
 
 class _TushumScreensState extends State<TushumScreens> {
@@ -24,105 +26,99 @@ class _TushumScreensState extends State<TushumScreens> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            print('Snapshot Error: ${snapshot.error}');
             return const Center(child: Text('Could not load Tusuhmlar'));
           }
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            print('No data found or empty list');
             return const Center(child: Text('No Tushumlar found'));
           }
-          final jonatmalar = snapshot.data!;
+          final tushumlar = snapshot.data!;
           return ListView.builder(
-            itemCount: jonatmalar.length,
+            itemCount: tushumlar.length,
             itemBuilder: (context, index) {
-              final jonatma = jonatmalar[index];
+              final tushum = tushumlar[index];
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Container(
-                  //   height: 1,
-                  //   width: double.infinity,
-                  //   color: Colors.blue,
-                  // ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          DateFormat('yyyy-MM-dd HH:mm:ss')
-                              .format(DateTime.parse(jonatma.date)),
-                          style: const TextStyle(
-                            fontSize: 13,
-                          ),
-                        ),
-                        Text(
-                          "+${jonatma.amount} so'm",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      DateFormat('dd-MM-yyyy')
+                          .format(DateTime.parse(tushum.date)),
+                      style: const TextStyle(
+                        fontSize: 13,
+                      ),
                     ),
                   ),
                   Container(
-                    height: 100,
-                    width: double.infinity,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 80,
-                            width: 120,
-                            color: Colors.blue,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                "+${jonatma.amount} so'm",
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.blue,
-                                ),
-                                textAlign: TextAlign.end,
+                    padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 8),
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                      border: Border.all(color: Colors.teal,width: 0.3),
+                      borderRadius: BorderRadius.circular(14),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.05),
+                          blurRadius: 9,
+                          offset: Offset(0, 4),
+                        ),
+                      ]
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(Assets.imagesIncome, height: 40),
+                            6.height,
+                            Text("From: ${tushum.fromCard}"),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              "+${tushum.amount}",
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.teal,
                               ),
-                              SizedBox(height: 5),
-                              Text(
-                                DateFormat('HH:mm').format(
-                                  DateTime.parse(jonatma.date),
-                                ),
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.grey,
+                              textAlign: TextAlign.end,
+                            ),
+                            5.height,
+                            Text(
+                              DateFormat('HH:mm').format(
+                                DateTime.parse(tushum.date),
+                              ),
+                              style: const TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            5.height,
+                            Container(
+                              height: 25,
+                              width: 80,
+                              decoration: const BoxDecoration(
+                                color: Colors.teal,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
                                 ),
                               ),
-                              SizedBox(height: 5),
-                              Container(
-                                height: 25,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(25),
+                              child: const Center(
+                                child: Text(
+                                  "O'tkazma",
+                                  style: TextStyle(
+                                    color: Colors.white,
                                   ),
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    "O'tkazma",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ],

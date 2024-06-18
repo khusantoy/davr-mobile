@@ -44,15 +44,15 @@ class UsersHttpServices {
         String userKey = data.keys.first;
         Map<String, dynamic> userData = data[userKey];
         userData['id'] = userKey;
-        print(userData['id']);
+        // print(userData['id']);
         User user = User.fromJson(userData);
         return user;
       } else {
-        print("No user found with userId: $userId");
+        // print("No user found with userId: $userId");
         return null;
       }
     } else {
-      print("Error fetching user data: ${response.statusCode}");
+      // print("Error fetching user data: ${response.statusCode}");
       return null;
     }
   }
@@ -79,13 +79,13 @@ class UsersHttpServices {
   }
 
   Future<void> deleteUser(String id, String userId) async {
-    print(id);
+    // print(id);
     try {
       Uri url = Uri.parse(
           "https://exam-team-5-default-rtdb.firebaseio.com/users/$id.json");
       await http.delete(url);
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 }

@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import '../../../controllers/cards_controller.dart';
 import '../../../controllers/transactions_controllers.dart';
 import '../../widgets/card_widget.dart';
+import '../../widgets/custom_drawer.dart';
 
 class TransactionScreen extends StatefulWidget {
   const TransactionScreen({super.key});
@@ -32,6 +33,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
       appBar: AppBar(
         title: const Text("Transaction"),
       ),
+      drawer: const CustomDrawer(),
       body: Form(
         key: formKey,
         child: Column(

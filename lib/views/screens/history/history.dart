@@ -2,6 +2,8 @@ import 'package:davr_mobile/views/screens/history/widgets/payments.dart';
 import 'package:davr_mobile/views/screens/history/widgets/transactions_via_cards.dart';
 import 'package:flutter/material.dart';
 
+import '../../widgets/custom_drawer.dart';
+
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
 
@@ -9,8 +11,9 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+        title: Text('History'),
       ),
+      drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(

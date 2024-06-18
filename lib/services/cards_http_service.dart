@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +16,7 @@ class CardsHttpService {
 
     final response = await http.get(url);
     final data = jsonDecode(response.body);
-    print(data);
+    // print(data);
     List<Karta> cards = [];
 
     if (data != null) {
@@ -33,7 +34,9 @@ class CardsHttpService {
           ));
         });
       } catch (e) {
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
       }
     }
     return cards;
@@ -64,9 +67,11 @@ class CardsHttpService {
     };
 
     try {
-      final response = await http.post(url, body: jsonEncode(cardData));
+      await http.post(url, body: jsonEncode(cardData));
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }
