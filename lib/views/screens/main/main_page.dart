@@ -2,6 +2,7 @@ import 'package:davr_mobile/views/screens/history/history.dart';
 import 'package:flutter/material.dart';
 
 import '../home/home.dart';
+import '../payments/payment_screen.dart';
 import '../transaction/transactions.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final screens = [
     const HomeScreen(),
-    const Center(child: Text('Payment')),
+    const PaymentScreen(),
     const TransactionScreen(),
     const HistoryScreen(),
   ];

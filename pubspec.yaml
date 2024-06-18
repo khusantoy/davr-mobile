@@ -37,3 +37,10 @@ flutter:
   assets:
     - assets/images/
     - assets/lotties/
+
+  fonts:
+    - family: Franklin
+      fonts:
+        - asset: assets/fonts/Franklin_font.ttf
+        - asset: assets/fonts/Franklin_italic_font.ttf
+          style: italic

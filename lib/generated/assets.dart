@@ -2,6 +2,8 @@
 class Assets {
   Assets._();
 
+  static const String fontsFranklinFont = 'assets/fonts/Franklin_font.ttf';
+  static const String fontsFranklinItalicFont = 'assets/fonts/Franklin_italic_font.ttf';
   static const String imagesExpense = 'assets/images/expense.png';
   static const String imagesIncome = 'assets/images/income.png';
   static const String imagesPerson = 'assets/images/person.png';
@@ -10,22 +12,18 @@ class Assets {
   static const String lottiesChat = 'assets/lotties/chat.json';
   static const String lottiesError = 'assets/lotties/error.json';
   static const String lottiesHello = 'assets/lotties/hello.json';
-  static const String lottiesIdentification =
-      'assets/lotties/identification.json';
+  static const String lottiesIdentification = 'assets/lotties/identification.json';
   static const String lottiesKundalik = 'assets/lotties/kundalik.json';
   static const String lottiesLanguage = 'assets/lotties/language.json';
   static const String lottiesLoader = 'assets/lotties/loader.json';
   static const String lottiesLockLoader = 'assets/lotties/lock_loader.json';
   static const String lottiesLogin = 'assets/lotties/login.json';
-  static const String lottiesLottieAnimation =
-      'assets/lotties/lottie_animation.json';
+  static const String lottiesLottieAnimation = 'assets/lotties/lottie_animation.json';
   static const String lottiesMark = 'assets/lotties/mark.json';
   static const String lottiesNfcCardRead = 'assets/lotties/nfc_card_read.json';
   static const String lottiesPasswordAnim = 'assets/lotties/password_anim.json';
-  static const String lottiesPayAndTransfer =
-      'assets/lotties/pay_and_transfer.json';
-  static const String lottiesPaymentSuccess =
-      'assets/lotties/payment_success.json';
+  static const String lottiesPayAndTransfer = 'assets/lotties/pay_and_transfer.json';
+  static const String lottiesPaymentSuccess = 'assets/lotties/payment_success.json';
   static const String lottiesSad = 'assets/lotties/sad.json';
   static const String lottiesSplash = 'assets/lotties/splash.json';
   static const String lottiesTimeOut = 'assets/lotties/time_out.json';
@@ -33,4 +31,5 @@ class Assets {
   static const String lottiesVandals = 'assets/lotties/vandals.json';
   static const String lottiesVisa = 'assets/lotties/visa.json';
   static const String lottiesWriteBlank = 'assets/lotties/write_blank.json';
+
 }
