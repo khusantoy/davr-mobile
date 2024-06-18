@@ -1,0 +1,17 @@
+{
+  "main": "Asosiy",
+  "mainTitle": "Vazifalar va Eslatmalar",
+  "statistics": "Statistika",
+  "cart": "Savatcha",
+  "profile": "Profil",
+  "todos": "Vazifalar",
+  "notes": "Eslatmalar",
+  "doneTodo": "Bajarilgan todolar",
+  "unDoneDodos": "Bajarilmagan todolar",
+  "courses": "Kurslar",
+  "name": "Ism",
+  "lastName": "Familya",
+  "phone": "Telefon raqami",
+  "signOut": "Tizimdan chiqish",
+  "resetPassword": "Parolni o'zgarirish"
+}

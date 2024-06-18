@@ -1,0 +1,18 @@
+{
+  "main": "Main",
+  "mainTitle": "Todos and Notes",
+  "statistics": "Statistics",
+  "cart": "Cart",
+  "profile": "Profile",
+  "todos": "Todos",
+  "notes": "Notes",
+  "doneTodo": "Completed todos",
+  "unDoneDodos": "Not Completed todos",
+  "courses": "Courses",
+  "name": "Name",
+  "lastName": "Last name",
+  "phone": "Phone number",
+  "signOut": "Sign Out",
+  "resetPassword": "Reset Password"
+
+}

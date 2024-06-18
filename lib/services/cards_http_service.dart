@@ -53,6 +53,18 @@ class CardsHttpService {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString("userId");
 
+    // Fetch existing cards to check for duplicate cardNumber
+    List<Karta> existingCards = await getCards();
+
+    // Check if cardNumber already exists
+    bool cardNumberExists = existingCards.any((card) => card.cardNumber == cardNumber);
+    if (cardNumberExists) {
+      if (kDebugMode) {
+        print("Card number already exists.");
+      }
+      return; // Exit the function without adding the card
+    }
+
     Uri url = Uri.parse(
         'https://exam-team-5-default-rtdb.firebaseio.com/cards2.json');
 

@@ -12,7 +12,7 @@ class PaymentHttpServices {
   Future<void> pushPayment(PaymentDepartments payment) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userId = prefs.getString('userId').toString();
-    final api = Uri.parse("$url/payments.json}");
+    final api = Uri.parse("$url/payments.json");
     final jsonData = json.encode(payment.toJson());
 
     final response = await http.post(
