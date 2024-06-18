@@ -32,7 +32,7 @@ class _PaymentToServicesState extends State<PaymentToServices> {
           return ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-              return Text('${snapshot.data![index].amount}');
+              return Text('${snapshot.data![index].amount}\nTo: ${snapshot.data![index].servicesName}');
             },
           );
         },
