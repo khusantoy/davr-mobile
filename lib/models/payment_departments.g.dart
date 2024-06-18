@@ -12,7 +12,8 @@ PaymentDepartments _$PaymentDepartmentsFromJson(Map<String, dynamic> json) =>
       date: DateTime.parse(json['date'] as String),
       servicesName: json['servicesName'] as String,
       servicesAccount: json['servicesAccount'] as String,
-      fromCard: json['toCard'] as String,
+      userId: json['userId'] as String,
+      fromCard: json['fromCard'] as String,
     );
 
 Map<String, dynamic> _$PaymentDepartmentsToJson(PaymentDepartments instance) =>
@@ -21,5 +22,6 @@ Map<String, dynamic> _$PaymentDepartmentsToJson(PaymentDepartments instance) =>
       'date': instance.date.toIso8601String(),
       'servicesName': instance.servicesName,
       'servicesAccount': instance.servicesAccount,
-      'toCard': instance.fromCard,
+      'userId': instance.userId,
+      'fromCard': instance.fromCard,
     };

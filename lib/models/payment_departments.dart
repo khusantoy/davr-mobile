@@ -1,3 +1,4 @@
+
 import 'package:json_annotation/json_annotation.dart';
 part 'payment_departments.g.dart';
 @JsonSerializable()
@@ -6,6 +7,7 @@ class PaymentDepartments{
   DateTime date;
   String servicesName;
   String servicesAccount;
+  String userId ;
   String fromCard;
 
   PaymentDepartments({
@@ -13,6 +15,7 @@ class PaymentDepartments{
     required this.date,
     required this.servicesName,
     required this.servicesAccount,
+    required this.userId,
     required this.fromCard
 });
 

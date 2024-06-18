@@ -29,7 +29,7 @@ class _PaymentSimState extends State<PaymentSim> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
@@ -366,17 +366,19 @@ class _PaymentSimState extends State<PaymentSim> {
                 onTap: () async {
                   double sum = double.parse(money.text);
                   await showDialog(
-                      context: context,
-                      builder: (ctx) {
-                        return PaymentMoney(
-                            paymentDepartments: PaymentDepartments(
-                                amount: sum,
-                                date: DateTime.now(),
-                                servicesName: widget.simCard.typeName,
-                                servicesAccount: phoneNumber.text,
-                                fromCard:
-                                    '8600969685857474')); //aka bu yerda kartani bervorasiz
-                      });
+                    context: context,
+                    builder: (ctx) {
+                      return PaymentMoney(
+                        paymentDepartments: PaymentDepartments(
+                            amount: sum,
+                            date: DateTime.now(),
+                            servicesName: widget.simCard.typeName,
+                            servicesAccount: phoneNumber.text,
+                            fromCard: '8600969685857474',
+                            userId: ''),
+                      ); //aka bu yerda kartani bervorasiz
+                    },
+                  );
                   Navigator.pop(context);
                 },
                 child: Padding(
