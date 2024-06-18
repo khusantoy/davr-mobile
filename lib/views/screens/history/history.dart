@@ -1,5 +1,6 @@
-import 'package:davr_mobile/views/screens/history/widgets/payments.dart';
+import 'package:davr_mobile/views/screens/history/widgets/payments_to_services.dart';
 import 'package:davr_mobile/views/screens/history/widgets/transactions_via_cards.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/custom_drawer.dart';
@@ -11,7 +12,7 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('History'),
+        title: const Text('History'),
       ),
       drawer: const CustomDrawer(),
       body: Padding(
@@ -24,8 +25,8 @@ class HistoryScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (ctx) => TransactionsViaCards(),
+                    CupertinoPageRoute(
+                      builder: (ctx) => const TransactionsViaCards(),
                     ),
                   );
                 },
@@ -35,7 +36,7 @@ class HistoryScreen extends StatelessWidget {
                   size: 25,
                   color: Colors.black,
                 ),
-                title: Text(
+                title: const Text(
                   "Kirim-Chiqim",
                   style: TextStyle(
                     fontSize: 20,
@@ -53,12 +54,20 @@ class HistoryScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
             SizedBox(
               height: 60,
               child: ListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (ctx) => const PaymentToServices(),
+                    ),
+                  );
+                },
                 tileColor: Colors.grey.shade200,
+                title: Text("Xizmatga to'lovlar"),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   size: 25,
@@ -72,6 +81,7 @@ class HistoryScreen extends StatelessWidget {
           ],
         ),
       ),
-    );;
+    );
+    ;
   }
 }

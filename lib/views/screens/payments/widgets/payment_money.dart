@@ -11,7 +11,7 @@ class PaymentMoney extends StatelessWidget {
 
   final controller = CardsController();
   bool isLoading = false;
-  PaymentPushController push = PaymentPushController();
+  PaymentsController push = PaymentsController();
 
   void getPush(PaymentDepartments payment) async{
     await push.pushPayment(paymentDepartments);
