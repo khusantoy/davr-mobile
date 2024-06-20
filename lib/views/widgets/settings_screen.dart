@@ -20,12 +20,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         value: AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark,
         onChanged: (value) {
           setState(() {
-                  isDark = !isDark;
+            isDark = !isDark;
 
-                  isDark
-                      ? AdaptiveTheme.of(context).setDark()
-                      : AdaptiveTheme.of(context).setLight();
-                });
+            isDark
+                ? AdaptiveTheme.of(context).setDark()
+                : AdaptiveTheme.of(context).setLight();
+          });
         },
         title: const Text("Tungi rejim"),
       ),

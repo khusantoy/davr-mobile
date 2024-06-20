@@ -3,6 +3,7 @@ import 'package:davr_mobile/views/screens/history/widgets/payments_to_services.d
 import 'package:davr_mobile/views/screens/history/widgets/transactions_via_cards.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../widgets/custom_drawer.dart';
 
@@ -39,10 +40,10 @@ class HistoryScreen extends StatelessWidget {
                   Icons.transform_outlined,
                   size: 25,
                 ),
-                title: const Text(
+                title: Text(
                   "Kirim-Chiqim",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -71,7 +72,14 @@ class HistoryScreen extends StatelessWidget {
                     AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark
                         ? Colors.black
                         : Colors.grey.shade300,
-                title: Text("Xizmatga to'lovlar"),
+                leading: const Icon(Icons.payments),
+                title: Text(
+                  "Xizmatga to'lovlar",
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   size: 25,

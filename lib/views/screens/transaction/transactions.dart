@@ -77,7 +77,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.attach_money),
-                  labelText: 'Amount',
+                  labelText: 'Miqdor',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(14),
                     borderSide: const BorderSide(color: Colors.grey),
