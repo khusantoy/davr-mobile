@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:davr_mobile/controllers/users_controller.dart';
 import 'package:davr_mobile/generated/assets.dart';
 import 'package:davr_mobile/services/auth_http_services.dart';
@@ -210,9 +211,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 RichText(
                   text: TextSpan(
                     children: [
-                      const TextSpan(
+                      TextSpan(
                         text: "Ro'yhatdan o'tganmisiz? ",
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(
+                            color: AdaptiveTheme.of(context).mode ==
+                                    AdaptiveThemeMode.dark
+                                ? Colors.white
+                                : Colors.black),
                       ),
                       TextSpan(
                         text: "Kirish",

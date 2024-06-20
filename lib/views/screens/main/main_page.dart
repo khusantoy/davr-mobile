@@ -27,31 +27,28 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: screens[_selectedIndex],
-      bottomNavigationBar: Theme(
-        data: ThemeData(splashColor: Colors.transparent),
-        child: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          type: BottomNavigationBarType.fixed,
-          onTap: (value) => setState(() => _selectedIndex = value),
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                label: 'Home',
-                activeIcon: Icon(Icons.home)),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.payments_outlined),
-                label: 'Payments',
-                activeIcon: Icon(Icons.payments)),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.currency_exchange),
-                label: 'Transactions',
-                activeIcon: Icon(Icons.currency_exchange_outlined)),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.history),
-                label: 'History',
-                activeIcon: Icon(Icons.history_outlined)),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        type: BottomNavigationBarType.fixed,
+        onTap: (value) => setState(() => _selectedIndex = value),
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              label: 'Home',
+              activeIcon: Icon(Icons.home)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.payments_outlined),
+              label: 'Payments',
+              activeIcon: Icon(Icons.payments)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.currency_exchange),
+              label: 'Transactions',
+              activeIcon: Icon(Icons.currency_exchange_outlined)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'History',
+              activeIcon: Icon(Icons.history_outlined)),
+        ],
       ),
     );
   }

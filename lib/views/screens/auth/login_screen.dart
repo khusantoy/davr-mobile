@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:davr_mobile/generated/assets.dart';
 import 'package:davr_mobile/services/auth_http_services.dart';
 import 'package:davr_mobile/views/screens/auth/forgot_password_screen.dart';
@@ -217,9 +218,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 RichText(
                   text: TextSpan(
                     children: [
-                      const TextSpan(
+                      TextSpan(
                         text: "Sizda hisob mavjud emasmi? ",
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(
+                            color: AdaptiveTheme.of(context).mode ==
+                                    AdaptiveThemeMode.dark
+                                ? Colors.white
+                                : Colors.black),
                       ),
                       TextSpan(
                         text: "Ro'yhatdan o'tish",

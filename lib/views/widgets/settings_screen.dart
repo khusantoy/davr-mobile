@@ -17,7 +17,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title: const Text("Sozlamalar"),
       ),
       body: SwitchListTile(
-        value: isDark,
+        value: AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark,
         onChanged: (value) {
           setState(() {
                   isDark = !isDark;

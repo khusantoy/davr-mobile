@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:davr_mobile/controllers/users_controller.dart';
 import 'package:davr_mobile/models/user.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class CustomDrawer extends StatefulWidget {
 
 class _CustomDrawerState extends State<CustomDrawer> {
   final UsersController usersController = UsersController();
+  final savedThemeMode = AdaptiveTheme.getThemeMode();
   User? user;
 
   @override
@@ -45,7 +47,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   style: const TextStyle(overflow: TextOverflow.ellipsis),
                 ),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                tileColor: Colors.grey.shade300,
+                tileColor:
+                    AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark
+                        ? Colors.black
+                        : Colors.grey.shade300,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -63,7 +68,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   leading: const Icon(Icons.settings),
                   title: const Text("Sozlamalar"),
                   trailing: const Icon(Icons.arrow_forward_ios),
-                  tileColor: Colors.grey.shade300,
+                  tileColor:
+                      AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark
+                          ? Colors.black
+                          : Colors.grey.shade300,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.r),
                   ),

@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../controllers/cards_controller.dart';
@@ -55,7 +56,10 @@ class _PaymentSimState extends State<PaymentSim> {
                     height: 110,
                     width: 110,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AdaptiveTheme.of(context).mode ==
+                                AdaptiveThemeMode.dark
+                            ? Colors.black
+                            : Colors.grey.shade300,
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(color: Colors.grey),
                         image: DecorationImage(
@@ -101,7 +105,10 @@ class _PaymentSimState extends State<PaymentSim> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.grey.shade300),
+                        color: AdaptiveTheme.of(context).mode ==
+                                AdaptiveThemeMode.dark
+                            ? Colors.black
+                            : Colors.grey.shade300),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -302,7 +309,10 @@ class _PaymentSimState extends State<PaymentSim> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.grey.shade300),
+                        color: AdaptiveTheme.of(context).mode ==
+                                AdaptiveThemeMode.dark
+                            ? Colors.black
+                            : Colors.grey.shade300),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -394,10 +404,10 @@ class _PaymentSimState extends State<PaymentSim> {
                     child: const Text(
                       "O'tkazish",
                       style: TextStyle(
-                          fontFamily: "Franklin",
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                        fontFamily: "Franklin",
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

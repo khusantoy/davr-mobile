@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:davr_mobile/views/widgets/custom_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
-                  color: const Color(0xffEEEEEE),
+                  color:
+                      AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark
+                          ? Colors.black
+                          : Colors.grey.shade300,
                   borderRadius: BorderRadius.circular(15)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

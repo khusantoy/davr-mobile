@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:davr_mobile/controllers/users_controller.dart';
 import 'package:davr_mobile/generated/assets.dart';
 import 'package:davr_mobile/main.dart';
@@ -92,7 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Navigator.pushNamedAndRemoveUntil(
       context,
       '/register',
-          (Route<dynamic> route) => false,
+      (Route<dynamic> route) => false,
     );
     AuthHttpServices.logout();
   }
@@ -116,7 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return const MyApp();
                   },
                 ),
-                    (Route<dynamic> route) => false,
+                (Route<dynamic> route) => false,
               );
               return AuthHttpServices.logout();
             },
@@ -126,84 +127,90 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: user == null
           ? const Center(
-        child: Text("Ma'lumotlar yuklanmadi"),
-      )
+              child: Text("Ma'lumotlar yuklanmadi"),
+            )
           : SingleChildScrollView(
-        child: Padding(
-          padding:
-          const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            children: [
-              SizedBox(
-                width: 200.w,
-                height: 200.h,
-                child: Lottie.asset(Assets.lottiesHello),
-              ),
-              Text(
-                user!.fullName,
-                style: TextStyle(
-                  fontSize: 22.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(
-                height: 25.h,
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Column(
                   children: [
-                    const Text("Elektron pochta"),
-                    Text(user!.email),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 15.h,
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Pasport seriyasi va raqami"),
-                    Text(user!.passportId)
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              SizedBox(
-                width: double.infinity,
-                height: 45.h,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r),
+                    SizedBox(
+                      width: 200.w,
+                      height: 200.h,
+                      child: Lottie.asset(Assets.lottiesHello),
                     ),
-                  ),
-                  onPressed: deleteUser,
-                  child: const Text(
-                    "Hisobni o'chirish",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                    Text(
+                      user!.fullName,
+                      style: TextStyle(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 25.h,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: AdaptiveTheme.of(context).mode ==
+                                AdaptiveThemeMode.dark
+                            ? Colors.black
+                            : Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Elektron pochta"),
+                          Text(user!.email),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: AdaptiveTheme.of(context).mode ==
+                                AdaptiveThemeMode.dark
+                            ? Colors.black
+                            : Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Pasport seriyasi va raqami"),
+                          Text(user!.passportId)
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 45.h,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                        ),
+                        onPressed: deleteUser,
+                        child: const Text(
+                          "Hisobni o'chirish",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

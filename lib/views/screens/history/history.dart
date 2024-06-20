@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:davr_mobile/views/screens/history/widgets/payments_to_services.dart';
 import 'package:davr_mobile/views/screens/history/widgets/transactions_via_cards.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,24 +31,24 @@ class HistoryScreen extends StatelessWidget {
                     ),
                   );
                 },
-                tileColor: Colors.grey.shade200,
+                tileColor:
+                    AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark
+                        ? Colors.black
+                        : Colors.grey.shade300,
                 leading: const Icon(
                   Icons.transform_outlined,
                   size: 25,
-                  color: Colors.black,
                 ),
                 title: const Text(
                   "Kirim-Chiqim",
                   style: TextStyle(
                     fontSize: 20,
-                    color: Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   size: 25,
-                  color: Colors.black,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
@@ -66,12 +67,14 @@ class HistoryScreen extends StatelessWidget {
                     ),
                   );
                 },
-                tileColor: Colors.grey.shade200,
+                tileColor:
+                    AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark
+                        ? Colors.black
+                        : Colors.grey.shade300,
                 title: Text("Xizmatga to'lovlar"),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   size: 25,
-                  color: Colors.black,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),

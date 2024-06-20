@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/payment.dart';
@@ -34,7 +35,9 @@ class _ShowSimPhoneState extends State<ShowSimPhone> {
           padding: const EdgeInsets.all(20.0),
           child: Container(
               decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark
+                        ? Colors.black
+                        : Colors.grey.shade300,
                   borderRadius: BorderRadius.circular(15)),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
