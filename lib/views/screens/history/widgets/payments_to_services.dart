@@ -35,7 +35,8 @@ class _PaymentToServicesState extends State<PaymentToServices> {
               return ListTile(
                 leading: const Icon(Icons.payment),
                 title: Text(snapshot.data![index].servicesName),
-                trailing: Text("\$ ${snapshot.data![index].amount.toString()}"),
+                trailing:
+                    Text("${snapshot.data![index].amount.toString()} sum"),
               );
               // return Text('${snapshot.data![index].amount}\nTo: ${snapshot.data![index].servicesName}');
             },

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:davr_mobile/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddCardDialog extends StatefulWidget {
   const AddCardDialog({super.key});
@@ -144,7 +145,7 @@ class _AddCardDialogState extends State<AddCardDialog> {
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: 140,
+                  width: 100.w,
 
                   /// Month
                   child: TextFormField(
@@ -177,7 +178,7 @@ class _AddCardDialogState extends State<AddCardDialog> {
                 ),
                 3.width,
                 SizedBox(
-                  width: 140,
+                  width: 110.w,
 
                   /// Year
                   child: TextFormField(
