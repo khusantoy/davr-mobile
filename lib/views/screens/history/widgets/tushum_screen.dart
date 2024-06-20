@@ -26,10 +26,10 @@ class _TushumScreensState extends State<TushumScreens> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return const Center(child: Text('Could not load Tusuhmlar'));
+            return const Center(child: Text("Tushumlarni yuklab bo'lmadi"));
           }
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No Tushumlar found'));
+            return const Center(child: Text("Tushumlar topilmadi"));
           }
           final tushumlar = snapshot.data!;
           return ListView.builder(

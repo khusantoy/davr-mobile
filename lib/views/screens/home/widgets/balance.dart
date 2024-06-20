@@ -24,7 +24,7 @@ class _UserBalanceState extends State<UserBalance> {
           return const Center(child: CircularProgressIndicator());
         }
         if (!snapshot.hasData || snapshot.data == null) {
-          return const Text('No cards found');
+          return const Text('Kartalar topilmadi');
         }
         double sumBalance = 0;
         for (var card in snapshot.data!) {

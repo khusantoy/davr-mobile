@@ -34,19 +34,19 @@ class _MainScreenState extends State<MainScreen> {
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined),
-              label: 'Home',
+              label: 'Bosh menyu',
               activeIcon: Icon(Icons.home)),
           BottomNavigationBarItem(
               icon: Icon(Icons.payments_outlined),
-              label: 'Payments',
+              label: "To'lovlar",
               activeIcon: Icon(Icons.payments)),
           BottomNavigationBarItem(
               icon: Icon(Icons.currency_exchange),
-              label: 'Transactions',
+              label: "O'tkazmalar",
               activeIcon: Icon(Icons.currency_exchange_outlined)),
           BottomNavigationBarItem(
               icon: Icon(Icons.history),
-              label: 'History',
+              label: 'Tarix',
               activeIcon: Icon(Icons.history_outlined)),
         ],
       ),

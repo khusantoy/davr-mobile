@@ -26,10 +26,10 @@ class _JonatmalarScreenState extends State<JonatmalarScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return const Center(child: Text('Could not load Jonatmalar'));
+            return const Center(child: Text('Jo\'natmalarni yuklab bo\'lmadi'));
           }
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No Jonatmalar found'));
+            return const Center(child: Text("Jo'natmalar topilmadi"));
           }
           final jonatmalar = snapshot.data!;
           return ListView.builder(
@@ -73,7 +73,7 @@ class _JonatmalarScreenState extends State<JonatmalarScreen> {
                           children: [
                             Image.asset(Assets.imagesExpense, height: 40),
                             6.height,
-                            Text("To: ${jonatma.toCard}")
+                            Text("${jonatma.toCard}")
                           ],
                         ),
                         Column(

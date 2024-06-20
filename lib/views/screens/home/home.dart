@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Bosh menyu'),
       ),
       drawer: const CustomDrawer(),
       body: Column(
@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("My Cards"),
+                  const Text("Mening kartalarim"),
                   IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.arrow_forward_ios))

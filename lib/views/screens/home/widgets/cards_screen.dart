@@ -54,7 +54,7 @@ class _CardsScreenState extends State<CardsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cards'),
+        title: const Text('Kartalar'),
       ),
       body: FutureBuilder(
         future: cardsController.getCards(),
@@ -63,7 +63,7 @@ class _CardsScreenState extends State<CardsScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (!snapshot.hasData) {
-            return const Text("no Cards");
+            return const Text("Kartalar mavjud emas");
           }
           return ListView.builder(
             itemCount: snapshot.data!.length,

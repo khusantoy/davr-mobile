@@ -87,7 +87,7 @@ class _AddCardDialogState extends State<AddCardDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       scrollable: true,
-      title: const Text("Add card"),
+      title: const Text("Karta qo'shish"),
       content: Form(
         key: formKey,
         child: Column(
@@ -100,7 +100,7 @@ class _AddCardDialogState extends State<AddCardDialog> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.credit_card),
-                labelText: 'Card number',
+                labelText: 'Karta raqami',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),
                   borderSide: const BorderSide(color: Colors.grey),
@@ -108,11 +108,11 @@ class _AddCardDialogState extends State<AddCardDialog> {
               ),
               validator: (value) {
                 if (value!.trim().isEmpty) {
-                  return "Please, enter the card number";
+                  return "Karta raqamini kiriting";
                 }
                 RegExp regExp = RegExp(r'^\d+$');
                 if (!regExp.hasMatch(value.trim())) {
-                  return "Please, enter a valid card number";
+                  return "Iltimos, to'g'ri karta raqam kiriting";
                 }
                 return null;
               },
@@ -125,7 +125,7 @@ class _AddCardDialogState extends State<AddCardDialog> {
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.credit_card),
-                labelText: 'Card name',
+                labelText: 'Karta nomi',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),
                   borderSide: const BorderSide(color: Colors.grey),
@@ -133,7 +133,7 @@ class _AddCardDialogState extends State<AddCardDialog> {
               ),
               validator: (value) {
                 if (value!.trim().isEmpty) {
-                  return "Please, enter the card name";
+                  return "Iltimos karta nomini kiriting";
                 }
                 return null;
               },
@@ -155,7 +155,7 @@ class _AddCardDialogState extends State<AddCardDialog> {
                     inputFormatters: [LengthLimitingTextInputFormatter(2)],
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.credit_card),
-                      labelText: 'Month',
+                      labelText: 'Oy',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
                         borderSide: const BorderSide(color: Colors.grey),
@@ -163,14 +163,14 @@ class _AddCardDialogState extends State<AddCardDialog> {
                     ),
                     validator: (value) {
                       if (value!.trim().isEmpty) {
-                        return "Enter month";
+                        return "Oyni kiriting";
                       }
 
                       RegExp regExp = RegExp(r'^\d+$');
                       if (!regExp.hasMatch(value.trim()) ||
                           int.parse(value) > 12 ||
                           int.parse(value) < 1) {
-                        return "Enter a valid month";
+                        return "Iltimos, mavjud oyni kiriting";
                       }
                       return null;
                     },
@@ -186,7 +186,7 @@ class _AddCardDialogState extends State<AddCardDialog> {
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.credit_card),
-                      labelText: 'Year',
+                      labelText: 'Yil',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
                         borderSide: const BorderSide(color: Colors.grey),
@@ -194,12 +194,12 @@ class _AddCardDialogState extends State<AddCardDialog> {
                     ),
                     validator: (value) {
                       if (value!.trim().isEmpty) {
-                        return "Enter year";
+                        return "Yilni kiriting";
                       }
 
                       RegExp regExp = RegExp(r'^\d+$');
                       if (!regExp.hasMatch(value.trim())) {
-                        return "Enter a valid year";
+                        return "Iltimos, mavjud yilni kiriting";
                       }
                       return null;
                     },
@@ -215,11 +215,11 @@ class _AddCardDialogState extends State<AddCardDialog> {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text("Cancel"),
+          child: const Text("Bekor qilish"),
         ),
         FilledButton(
           onPressed: submit,
-          child: const Text("Save"),
+          child: const Text("Saqlash"),
         ),
       ],
     );

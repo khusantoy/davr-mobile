@@ -19,7 +19,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Payments'),
+        title: const Text("To'lovlar"),
       ),
       body: SingleChildScrollView(
         child: Padding(

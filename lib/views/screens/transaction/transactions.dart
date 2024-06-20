@@ -31,7 +31,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Transaction"),
+        title: const Text("O'tkazmalar"),
       ),
       drawer: const CustomDrawer(),
       body: Form(
@@ -49,7 +49,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.credit_card),
-                  labelText: 'Card number of receiver',
+                  labelText: 'Qabul qiluvchining karta raqami',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(14),
                     borderSide: const BorderSide(color: Colors.grey),
@@ -57,11 +57,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 ),
                 validator: (value) {
                   if (value!.trim().isEmpty) {
-                    return "Please, enter the card number";
+                    return "Karta raqamini kiriting";
                   }
                   RegExp regExp = RegExp(r'^\d+$');
                   if (!regExp.hasMatch(value.trim())) {
-                    return "Please, enter a valid card number";
+                    return "Mavjud karta raqamini kiriting";
                   }
                   return null;
                 },
@@ -85,7 +85,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 ),
                 validator: (value) {
                   if (value!.trim().isEmpty) {
-                    return "Please, enter the amount";
+                    return "Iltimos, miqdorni kiriting";
                   }
                   return null;
                 },
@@ -107,22 +107,25 @@ class _TransactionScreenState extends State<TransactionScreen> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text("Not enough money in card"),
+                                title: Text("Kartada mablag' yetarli emas"),
                               );
                             },
                           );
                           return;
                         }
-                        await trsController.sendMoney(
-                            fromCard,
-                            int.parse(cardTextController.text),
-                            double.parse(amountTextController.text));
-                        await cardsController
-                            .getCards()
-                            .then((value) => setState(() {}));
+                        await trsController
+                            .sendMoney(
+                                fromCard,
+                                int.parse(cardTextController.text),
+                                double.parse(amountTextController.text))
+                            .then((value) {
+                          cardsController
+                              .getCards()
+                              .then((value) => setState(() {}));
+                        });
                       }
                     },
-                    child: const Text('Send')),
+                    child: const Text('Yuborish')),
               ),
             ),
             10.height,
@@ -130,7 +133,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: EdgeInsets.only(left: 20),
-                child: Text('My Cards'),
+                child: Text('Mening kartalarim'),
               ),
             ),
             Expanded(
@@ -141,7 +144,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                     return const Center(child: CircularProgressIndicator());
                   }
                   if (!snapshot.hasData || snapshot.data == null) {
-                    return const Text('No cards found');
+                    return const Text('Kartalar topilmadi');
                   }
                   final cards = snapshot.data;
                   return ListView.builder(

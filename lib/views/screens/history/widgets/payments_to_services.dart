@@ -24,10 +24,10 @@ class _PaymentToServicesState extends State<PaymentToServices> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return const Center(child: Text('Could not load Payments'));
+            return const Center(child: Text("To'lovlarni yuklab bo'lmadi"));
           }
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No payments found'));
+            return const Center(child: Text("To'lovlar topilmadi"));
           }
           return ListView.builder(
             itemCount: snapshot.data!.length,

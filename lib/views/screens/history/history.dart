@@ -13,7 +13,7 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('History'),
+        title: const Text('Tarix'),
       ),
       drawer: const CustomDrawer(),
       body: Padding(
