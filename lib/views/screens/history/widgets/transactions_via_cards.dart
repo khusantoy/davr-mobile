@@ -9,7 +9,7 @@ class TransactionsViaCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Kirim-Chiqim"),
@@ -24,6 +24,7 @@ class TransactionsViaCards extends StatelessWidget {
           children: [
             JonatmalarScreen(),
             TushumScreens(),
+            
           ],
         ),
       ),

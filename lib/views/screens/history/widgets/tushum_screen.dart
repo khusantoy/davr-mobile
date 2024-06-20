@@ -64,7 +64,6 @@ class _TushumScreensState extends State<TushumScreens> {
                         ),
                       ]
                     ),
-
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

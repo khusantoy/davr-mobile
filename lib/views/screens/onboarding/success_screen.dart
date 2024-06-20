@@ -15,7 +15,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, '/main');
     });
   }
 

@@ -73,7 +73,7 @@ class _JonatmalarScreenState extends State<JonatmalarScreen> {
                           children: [
                             Image.asset(Assets.imagesExpense, height: 40),
                             6.height,
-                            Text("To: ${jonatma.fromCard}")
+                            Text("To: ${jonatma.toCard}")
                           ],
                         ),
                         Column(

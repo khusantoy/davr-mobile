@@ -316,12 +316,10 @@ class _PaymentSimState extends State<PaymentSim> {
                         const SizedBox(
                           height: 10,
                         ),
-                        // Text("500 dan 1500000 so'mgacha",style: TextStyle(fontSize: 17,fontFamily: "Franklin",fontWeight: FontWeight.bold),),
                         TextFormField(
                           onChanged: (value) async {
                             final data = await cardsController.getCards();
 
-                            //aka mana shu yerda tekshirip keting kartadagi mablag yetarlimi yoki yoq
                             try {
                               int numb = int.parse(value);
                               if (numb < 500) {
