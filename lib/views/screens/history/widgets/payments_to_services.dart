@@ -15,7 +15,7 @@ class _PaymentToServicesState extends State<PaymentToServices> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Xizmatga to'lovlar"),
+        title: const Text("Xizmatga to'lovlar"),
       ),
       body: FutureBuilder(
         future: paymentsController.getPayments(),
@@ -32,7 +32,12 @@ class _PaymentToServicesState extends State<PaymentToServices> {
           return ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-              return Text('${snapshot.data![index].amount}\nTo: ${snapshot.data![index].servicesName}');
+              return ListTile(
+                leading: const Icon(Icons.payment),
+                title: Text(snapshot.data![index].servicesName),
+                trailing: Text("\$ ${snapshot.data![index].amount.toString()}"),
+              );
+              // return Text('${snapshot.data![index].amount}\nTo: ${snapshot.data![index].servicesName}');
             },
           );
         },
