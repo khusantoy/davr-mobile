@@ -1,5 +1,4 @@
 import 'package:davr_mobile/services/auth_http_services.dart';
-import 'package:davr_mobile/views/screens/auth/login_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
